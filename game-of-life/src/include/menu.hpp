@@ -3,21 +3,25 @@
 #include <raylib.h>
 #include <string>
 #include <vector>
+#include "simulation.hpp"
 
 class Menu {
 public:
-    Menu(); // Constructor to initialize menu items
-    void Update();
+    Menu(Simulation* simulation);
+    void Update(Simulation* simulation);
     void Draw();
 
 private:
     struct MenuItem {
-        std::string text;
-        void (*action)();
+    std::string text;
+    void (*action)(Simulation* simulation);
+    MenuItem(std::string text, void (*action)(Simulation* simulation)) : 
+        text(text), action(action) {}
     };
 
     std::vector<MenuItem> menuItems;
     int selectedIndex;
+    Simulation* simulation;
 
-    void InitializeMenuItems(); // Method to initialize menu items
+    void InitializeMenuItems();
 };

@@ -1,28 +1,34 @@
 #include <iostream>
 #include <menu.hpp>
+#include <simulation.hpp>
 
-Menu::Menu() : selectedIndex(0) {
+Menu::Menu(Simulation* simulation) 
+: selectedIndex(0), simulation(simulation) {
     InitializeMenuItems();
 }
 
-void Action1() {
-    printf("Option 1 selected!\n");
+void BasicGlider(Simulation* simulation) {
+    simulation->SetCellValue(3, 4, 1);
+    simulation->SetCellValue(3, 5, 1);
+    simulation->SetCellValue(4, 5, 1);
+    simulation->SetCellValue(2, 5, 1);
 }
 
-void Action2() {
+void Action2(Simulation* simulation) {
     printf("Option 2 selected!\n");
 }
 
-void Action3() {
+void Action3(Simulation* simulation) {
     printf("Option 3 selected!\n");
 }
+
 void Menu::InitializeMenuItems() {
-    menuItems.emplace_back(MenuItem{"Option 1", Action1});
+    menuItems.emplace_back(MenuItem{"Basic Glider", BasicGlider});
     menuItems.emplace_back(MenuItem{"Option 2", Action2});
     menuItems.emplace_back(MenuItem{"Option 3", Action3});
 }
 
-void Menu::Update() {
+void Menu::Update(Simulation* simulation) {
     if (IsKeyPressed(KEY_DOWN)) {
         selectedIndex++;
         if (selectedIndex >= menuItems.size()) {
@@ -36,12 +42,12 @@ void Menu::Update() {
         }
     }
     if (IsKeyPressed(KEY_ENTER)) {
-        menuItems[selectedIndex].action();
+        menuItems[selectedIndex].action(simulation);
     }
 }
 
 void Menu::Draw() {
-    int menuWidth = 100;
+    int menuWidth = 200;
     int menuHeight = menuItems.size() * 30 + 20;
 
     int x = 10;

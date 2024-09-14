@@ -15,8 +15,8 @@ int main(void) {
     int FPS = 25;
     SetTargetFPS(FPS);
 
-    Menu menu;
     Simulation simulation(WINDOW_WIDTH, WINDOW_HEIGHT, cellSize);
+    Menu menu(&simulation);
 
     while (!WindowShouldClose())
     {
@@ -48,7 +48,7 @@ int main(void) {
         }
 
         simulation.Update();
-        menu.Update();
+        menu.Update(&simulation);
 
         BeginDrawing();
         ClearBackground(BG_COLOR);
