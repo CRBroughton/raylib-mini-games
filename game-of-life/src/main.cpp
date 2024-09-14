@@ -1,4 +1,5 @@
 #include <raylib.h>
+#include <iostream>
 #include <simulation.hpp>
 
 int main(void) {
@@ -12,6 +13,13 @@ int main(void) {
     SetTargetFPS(60);
 
     Simulation simulation(screenWidth, screenHeight, cellSize);
+    simulation.SetCellValue(3, 4, 1);
+    simulation.SetCellValue(3, 5, 1);
+    simulation.SetCellValue(4, 5, 1);
+    simulation.SetCellValue(2, 5, 1);
+
+    std::cout << simulation.CountLiveNeighbours(3, 4) << std::endl;
+
 
     while (!WindowShouldClose())
     {
