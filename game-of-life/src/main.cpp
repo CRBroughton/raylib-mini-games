@@ -13,15 +13,6 @@ int main(void) {
     SetTargetFPS(60);
 
     Simulation simulation(screenWidth, screenHeight, cellSize);
-    simulation.SetCellValue(5, 29, 1);
-    simulation.SetCellValue(6, 0, 1);
-    simulation.SetCellValue(5, 0, 1);
-    simulation.SetCellValue(4, 0, 1);
-
-
-
-    std::cout << simulation.CountLiveNeighbours(5, 29) << std::endl;
-
 
     while (!WindowShouldClose())
     {
