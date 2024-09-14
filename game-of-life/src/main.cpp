@@ -2,19 +2,19 @@
 
 int main(void)
 {
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    Color BG_COLOR = {29, 29, 29, 255};
 
-    InitWindow(screenWidth, screenHeight, "Hello, World!");
+    const int screenWidth = 750;
+    const int screenHeight = 750;
+    const int cellSize = 25;
+
+    InitWindow(screenWidth, screenHeight, "Conways Game of Life");
+    SetTargetFPS(60);
     while (!WindowShouldClose())
     {
 
         BeginDrawing();
-
-        ClearBackground(RAYWHITE);
-
-        DrawText("Hello, World!", screenWidth / 2 - 60, screenHeight / 2 - 20, 40, DARKGRAY);
-
+        ClearBackground(BG_COLOR);
         EndDrawing();
     }
 
