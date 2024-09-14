@@ -10,7 +10,7 @@ void Grid::Draw()
                 Color{0, 255, 0, 255} :
                 Color{55, 55, 55, 255};
 
-            DrawRectangle(column * cellSize, row * cellSize, cellSize, cellSize, color);
+            DrawRectangle(column * cellSize, row * cellSize, cellSize - 1, cellSize - 1, color);
         }
     }
 }

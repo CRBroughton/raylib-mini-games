@@ -1,4 +1,5 @@
 #include <raylib.h>
+#include "grid.hpp"
 
 int main(void)
 {
@@ -10,11 +11,15 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "Conways Game of Life");
     SetTargetFPS(60);
+
+    Grid grid(screenWidth, screenHeight, cellSize);
+
     while (!WindowShouldClose())
     {
 
         BeginDrawing();
         ClearBackground(BG_COLOR);
+        grid.Draw();
         EndDrawing();
     }
 
