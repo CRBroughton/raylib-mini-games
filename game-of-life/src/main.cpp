@@ -1,5 +1,5 @@
 #include <raylib.h>
-#include "grid.hpp"
+#include <simulation.hpp>
 
 int main(void) {
     Color BG_COLOR = {29, 29, 29, 255};
@@ -11,14 +11,14 @@ int main(void) {
     InitWindow(screenWidth, screenHeight, "Conways Game of Life");
     SetTargetFPS(60);
 
-    Grid grid(screenWidth, screenHeight, cellSize);
+    Simulation simulation(screenWidth, screenHeight, cellSize);
 
     while (!WindowShouldClose())
     {
 
         BeginDrawing();
         ClearBackground(BG_COLOR);
-        grid.Draw();
+        simulation.Draw();
         EndDrawing();
     }
 
