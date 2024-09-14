@@ -1,0 +1,10 @@
+version: '3'
+
+vars:
+  GAME_NAME: game-of-life
+  GAME_VERSION: 0.0.1
+
+tasks:
+  linux:
+    cmds:
+      - g++ src/*.cpp -o debug/{{.GAME_NAME}}-{{.GAME_VERSION}}-debug -I./src/include -L./src/lib -lraylib -Wno-missing-braces  -lGL -lm -lpthread -ldl -lrt -lX11 -Wall
