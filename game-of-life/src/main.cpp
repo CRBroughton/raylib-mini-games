@@ -5,17 +5,30 @@
 int main(void) {
     Color BG_COLOR = {29, 29, 29, 255};
 
-    const int WINDOW_WIDTH = 1000;
-    const int WINDOW_HEIGHT = 1000;
-    const int cellSize = 4;
+    const int WINDOW_WIDTH = 750;
+    const int WINDOW_HEIGHT = 750;
+    const int cellSize = 25;
 
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Conways Game of Life");
-    SetTargetFPS(25);
+
+    int FPS = 25;
+    SetTargetFPS(FPS);
 
     Simulation simulation(WINDOW_WIDTH, WINDOW_HEIGHT, cellSize);
 
     while (!WindowShouldClose())
     {
+        if(IsKeyPressed(KEY_SPACE)) {
+            simulation.Toggle();
+        }
+        else if(IsKeyDown(KEY_F)) {
+            FPS += 2;
+            SetTargetFPS(FPS);
+        }
+        else if(IsKeyDown(KEY_D)) {
+            FPS -= 2;
+            SetTargetFPS(FPS);
+        }
 
         simulation.Update();
 
