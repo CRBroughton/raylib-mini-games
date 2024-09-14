@@ -8,6 +8,8 @@ class Grid {
         void Draw();
         void SetValue(int row, int column, int value);
         int Getvalue(int row, int column);
+        int GetRows() { return rows;};
+        int GetColumns() { return columns;};
     private:
         int rows;
         int columns;
