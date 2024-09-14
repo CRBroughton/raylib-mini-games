@@ -8,10 +8,11 @@ Menu::Menu(Simulation* simulation)
 }
 
 void BasicGlider(Simulation* simulation) {
-    simulation->SetCellValue(3, 4, 1);
-    simulation->SetCellValue(3, 5, 1);
-    simulation->SetCellValue(4, 5, 1);
-    simulation->SetCellValue(2, 5, 1);
+    simulation->SetCellValue(1, 2, 1);
+    simulation->SetCellValue(2, 3, 1);
+    simulation->SetCellValue(3, 1, 1);
+    simulation->SetCellValue(3, 2, 1);
+    simulation->SetCellValue(3, 3, 1);
 }
 
 void Action2(Simulation* simulation) {
