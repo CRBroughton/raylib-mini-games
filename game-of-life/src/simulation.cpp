@@ -64,4 +64,14 @@ void Simulation::Update() {
             }
         grid = tempGrid;
     }
+}
+void Simulation::ClearGrid() {
+    if(!isRunning()) {
+        grid.Clear();
+    }
+}
+void Simulation::CreateRandomState() {
+    if(!isRunning()) {
+        grid.FillRandom();
+    }
 };

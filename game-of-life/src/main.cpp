@@ -29,6 +29,12 @@ int main(void) {
             FPS -= 2;
             SetTargetFPS(FPS);
         }
+        else if(IsKeyPressed(KEY_C)) {
+            simulation.ClearGrid();
+        }
+        else if(IsKeyPressed(KEY_R)) {
+            simulation.CreateRandomState();
+        }
 
         simulation.Update();
 
