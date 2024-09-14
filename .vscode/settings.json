@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "iostream": "cpp"
+    },
+    "conventionalCommits.scopes": [
+        "game-of-life"
+    ]
+}

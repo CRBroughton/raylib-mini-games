@@ -1,6 +1,7 @@
 #include <raylib.h>
 #include <iostream>
 #include <simulation.hpp>
+#include <menu.hpp>
 
 int main(void) {
     Color BG_COLOR = {29, 29, 29, 255};
@@ -14,6 +15,7 @@ int main(void) {
     int FPS = 25;
     SetTargetFPS(FPS);
 
+    Menu menu;
     Simulation simulation(WINDOW_WIDTH, WINDOW_HEIGHT, cellSize);
 
     while (!WindowShouldClose())
@@ -46,10 +48,12 @@ int main(void) {
         }
 
         simulation.Update();
+        menu.Update();
 
         BeginDrawing();
         ClearBackground(BG_COLOR);
         simulation.Draw();
+        menu.Draw();
         EndDrawing();
     }
 
