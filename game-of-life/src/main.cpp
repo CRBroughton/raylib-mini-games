@@ -1,8 +1,7 @@
 #include <raylib.h>
 #include "grid.hpp"
 
-int main(void)
-{
+int main(void) {
     Color BG_COLOR = {29, 29, 29, 255};
 
     const int screenWidth = 750;

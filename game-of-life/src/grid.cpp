@@ -1,8 +1,7 @@
 #include <raylib.h>
 #include "grid.hpp"
 
-void Grid::Draw()
-{
+void Grid::Draw() {
     // Look through every cell
     for(int row = 0; row < rows; row++) {
         for(int column = 0; column < columns; column++) {
@@ -12,5 +11,11 @@ void Grid::Draw()
 
             DrawRectangle(column * cellSize, row * cellSize, cellSize - 1, cellSize - 1, color);
         }
+    }
+}
+
+void Grid::SetValue(int row, int column, int value) {
+    if(row >= 0 && row < rows && column >= 0 && column < columns) {
+        cells[row][column] = value;
     }
 }
