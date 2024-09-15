@@ -1,10 +1,11 @@
 #pragma once
 #include <vector>
+#include "cell.hpp"
 
 class Grid {
     public:
         Grid(int width, int height, int cellSize)
-        : rows(height / cellSize), columns(width / cellSize), cellSize(cellSize), cells(rows, std::vector<int>(columns, 0)) {};
+        : rows(height / cellSize), columns(width / cellSize), cellSize(cellSize), cells(rows, std::vector<Cell>(columns)) {};
         void Draw();
         void SetValue(int row, int column, int value);
         int Getvalue(int row, int column);
@@ -17,6 +18,6 @@ class Grid {
         int rows;
         int columns;
         int cellSize;
-        std::vector<std::vector<int>> cells;
+        std::vector<std::vector<Cell>> cells;
         bool isWithinBounds(int row, int column);
 };

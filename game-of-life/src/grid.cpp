@@ -5,7 +5,7 @@ void Grid::Draw() {
     // Look through every cell
     for(int row = 0; row < rows; row++) {
         for(int column = 0; column < columns; column++) {
-            Color color = cells[row][column] ? 
+            Color color = cells[row][column].isAlive() ? 
                 Color{0, 255, 0, 255} :
                 Color{55, 55, 55, 255};
 
@@ -16,13 +16,13 @@ void Grid::Draw() {
 
 void Grid::SetValue(int row, int column, int value) {
     if(isWithinBounds(row, column)) {
-        cells[row][column] = value;
+        cells[row][column].setAlive(value);
     }
 }
 
 int Grid::Getvalue(int row, int column) {
     if(isWithinBounds(row, column)) {
-       return cells[row][column];
+       return cells[row][column].isAlive();
     }
     return 0;
 }
@@ -31,7 +31,7 @@ void Grid::FillRandom() {
     for(int row = 0; row < rows; row++) {
         for(int column = 0; column < columns; column++) {
             int randomValue = GetRandomValue(0, 4);
-            cells[row][column] = (randomValue == 4) ? 1 : 0;
+            cells[row][column].setAlive((randomValue == 4) ? 1 : 0);
         }
     }
 }
@@ -39,14 +39,14 @@ void Grid::FillRandom() {
 void Grid::Clear() {
     for(int row = 0; row < rows; row++) {
         for(int column = 0; column < columns; column++) {
-            cells[row][column] = 0;
+            cells[row][column].setAlive(false);
         }
     }
 }
 
 void Grid::ToggleCell(int row, int column) {
     if(isWithinBounds(row, column)) {
-        cells[row][column] = !cells[row][column];
+        cells[row][column].setAlive(!cells[row][column].isAlive());
     }
 }
 
