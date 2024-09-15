@@ -8,7 +8,7 @@ int main(void) {
 
     const int WINDOW_WIDTH = 600;
     const int WINDOW_HEIGHT = 600;
-    const int cellSize = 6;
+    const int cellSize = 8;
 
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Conways Game of Life");
 
