@@ -16,7 +16,9 @@ void Grid::Draw() {
                     color = {78,0,106, 255}; 
                 } 
             }
-            DrawRectangle(column * cellSize, row * cellSize, cellSize - 2, cellSize - 2, color);
+            int centerX = column * cellSize + cellSize / 2;
+            int centerY = row * cellSize + cellSize / 2;
+            DrawCircle(centerX, centerY, cellSize / 2 - 1, color);
         }
     }
 }
