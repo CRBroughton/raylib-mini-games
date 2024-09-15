@@ -1,5 +1,7 @@
 #include "cell.hpp"
 
+Cell::Cell() {}
+
 bool Cell::isAlive() {
     return alive;
 }
