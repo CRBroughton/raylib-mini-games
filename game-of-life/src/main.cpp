@@ -6,9 +6,9 @@
 int main(void) {
     Color BG_COLOR = {40, 40, 40, 255};
 
-    const int WINDOW_WIDTH = 400;
-    const int WINDOW_HEIGHT = 400;
-    const int cellSize = 4;
+    const int WINDOW_WIDTH = 600;
+    const int WINDOW_HEIGHT = 600;
+    const int cellSize = 6;
 
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Conways Game of Life");
 

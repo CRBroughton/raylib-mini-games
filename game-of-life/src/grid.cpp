@@ -8,17 +8,15 @@ void Grid::Draw() {
             Cell cell = cells[row][column];
             Color color;
             if (cell.isAlive()) {
-                color = {184, 216, 190, 255};
+                color = {66,92,94, 255};
             } else {
                 if (cell.getHealth() == 0) {
                     color = {40, 40, 40, 255};
                 } else if (cell.getHealth() == 1) {
-                    color = {200, 225, 204, 255}; 
-                } else if (cell.getHealth() == 2) {
-                    color = {100, 100, 234, 255}; 
-                }
+                    color = {78,0,106, 255}; 
+                } 
             }
-            DrawRectangle(column * cellSize, row * cellSize, cellSize - 1, cellSize - 1, color);
+            DrawRectangle(column * cellSize, row * cellSize, cellSize - 2, cellSize - 2, color);
         }
     }
 }
