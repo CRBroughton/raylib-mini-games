@@ -1,2 +1,8 @@
 **/raylib
 ***-debug
+
+# WASM FILES
+**/*.html
+**/*.js
+**/*.wasm
+**/*.data

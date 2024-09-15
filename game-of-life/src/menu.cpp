@@ -1,6 +1,6 @@
 #include <iostream>
-#include <menu.hpp>
-#include <simulation.hpp>
+#include "include/menu.hpp"
+#include "include/simulation.hpp"
 
 Menu::Menu(Simulation* simulation) 
 : selectedIndex(0), simulation(simulation) {

@@ -1,6 +1,6 @@
 #include <raylib.h>
-#include "grid.hpp"
 #include <iostream>
+#include "include/grid.hpp"
 void Grid::Draw() {
     // Look through every cell
     for (int row = 0; row < rows; row++) {

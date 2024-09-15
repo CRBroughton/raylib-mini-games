@@ -1,7 +1,7 @@
 #include <raylib.h>
 #include <iostream>
-#include <simulation.hpp>
-#include <menu.hpp>
+#include "include/simulation.hpp"
+#include "include/menu.hpp"
 
 int main(void) {
     Color BG_COLOR = {40, 40, 40, 255};

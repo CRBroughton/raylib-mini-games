@@ -1,7 +1,7 @@
 #include <vector>
 #include <utility>
 #include <iostream>
-#include "simulation.hpp"
+#include "include/simulation.hpp"
 
 void Simulation::Draw() {
     grid.Draw();
