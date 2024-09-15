@@ -14,6 +14,7 @@ class Grid {
         void FillRandom();
         void Clear();
         void ToggleCell(int row, int column);
+        std::vector<std::vector<Cell>>& getCells() { return cells; }
     private:
         int rows;
         int columns;

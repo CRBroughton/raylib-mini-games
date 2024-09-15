@@ -4,15 +4,15 @@
 #include <menu.hpp>
 
 int main(void) {
-    Color BG_COLOR = {29, 29, 29, 255};
+    Color BG_COLOR = {40, 40, 40, 255};
 
-    const int WINDOW_WIDTH = 750;
-    const int WINDOW_HEIGHT = 750;
-    const int cellSize = 25;
+    const int WINDOW_WIDTH = 400;
+    const int WINDOW_HEIGHT = 400;
+    const int cellSize = 4;
 
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Conways Game of Life");
 
-    int FPS = 25;
+    int FPS = 15;
     SetTargetFPS(FPS);
 
     Simulation simulation(WINDOW_WIDTH, WINDOW_HEIGHT, cellSize);
@@ -47,13 +47,22 @@ int main(void) {
             simulation.CreateRandomState();
         }
 
+        if(IsKeyPressed(KEY_ENTER)) {
+            menu.show = !menu.show;
+        }
+
         simulation.Update();
         menu.Update(&simulation);
 
         BeginDrawing();
         ClearBackground(BG_COLOR);
         simulation.Draw();
-        menu.Draw();
+        
+        if(menu.show) {
+            menu.Draw();
+        }
+
+
         EndDrawing();
     }
 

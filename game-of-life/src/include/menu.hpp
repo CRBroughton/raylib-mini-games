@@ -10,6 +10,7 @@ public:
     Menu(Simulation* simulation);
     void Update(Simulation* simulation);
     void Draw();
+    bool show = false;
 
 private:
     struct MenuItem {

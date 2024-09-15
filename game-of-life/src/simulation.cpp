@@ -1,5 +1,6 @@
 #include <vector>
 #include <utility>
+#include <iostream>
 #include "simulation.hpp"
 
 void Simulation::Draw() {
@@ -36,27 +37,37 @@ int Simulation::CountLiveNeighbours(int row, int column) {
     return liveNeighbours;
 }
 
+
 void Simulation::Update() {
     if (isRunning()) {
         for(int row = 0; row < grid.GetRows(); row++) {
                 for(int column = 0; column < grid.GetColumns(); column++) {
                     int liveNeighbours = CountLiveNeighbours(row, column);
                     int cellValue = grid.Getvalue(row, column);
+                    Cell& cell = tempGrid.getCells()[row][column];
 
                     if(cellValue == 1) {
                         // Overpopulation & Underpopulation
                         if(liveNeighbours > 3 || liveNeighbours < 2) {
-                            tempGrid.SetValue(row, column, 0);
+                            tempGrid.SetValue(row, column, false);
+                            if (cell.getHealth() <= 5 && cell.getHealth() > 0) {
+                                cell.decrementHealth();
+                            }
                         } else {
-                            tempGrid.SetValue(row, column, 1);
-
+                            tempGrid.SetValue(row, column, true);
+                            cell.maxHealth();
                         }
                     } else {
                         // Stasis and Repopulation
                         if(liveNeighbours == 3) {
-                            tempGrid.SetValue(row, column, 1);
+                            tempGrid.SetValue(row, column, true);
+                            int cellHealth = cell.getHealth();
+                            cell.maxHealth();
                         } else {
-                            tempGrid.SetValue(row, column, 0);
+                            tempGrid.SetValue(row, column, false);
+                            if (cell.getHealth() <= 5 && cell.getHealth() > 0) {
+                                cell.decrementHealth();
+                            }
                         }
                     }
 
@@ -72,6 +83,12 @@ void Simulation::ClearGrid() {
 }
 void Simulation::CreateRandomState() {
     if(!isRunning()) {
+        for(int row = 0; row < grid.GetRows(); row++) {
+            for(int column = 0; column < grid.GetColumns(); column++) {
+                grid.getCells()[row][column].resetHealth();
+                tempGrid.getCells()[row][column].resetHealth();
+            }
+        }
         grid.FillRandom();
     }
 }
