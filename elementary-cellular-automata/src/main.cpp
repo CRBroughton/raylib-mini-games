@@ -1,6 +1,7 @@
 #include <raylib.h>
 #include <iostream>
 #include <vector>
+#include <cstdlib>
 
 int calculateState(int a, int b, int c) {
     if (a == 1 && b == 1 && c == 1) return 1;
@@ -11,14 +12,13 @@ int calculateState(int a, int b, int c) {
     if (a == 0 && b == 1 && c == 0) return 0;
     if (a == 0 && b == 0 && c == 1) return 1;
     if (a == 0 && b == 0 && c == 0) return 0;
-    return 0;
 }
 
 void setup(std::vector<int>& cells, int cellSize) {
     int total = 400 / cellSize;
     cells.resize(total);
-    for (int i = 0; i < total; ++i) {
-        cells[i] = i % 2;
+    for (int i = 0; i < total; i++) {
+        cells[i] = rand() % 2;
     }
 }
 
@@ -39,10 +39,9 @@ int main(void) {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-        ClearBackground(BG_COLOR);
 
         // Draw the current cells
-        for (int i = 0; i < cells.size(); ++i) {
+        for (int i = 0; i < cells.size(); i++) {
             int x = i * cellSize;
             const int borderWidth = 1;
             DrawRectangle(x - borderWidth, y - borderWidth, cellSize + 2 * borderWidth, cellSize + 2 * borderWidth, BLACK);
@@ -62,7 +61,7 @@ int main(void) {
         nextCells[0] = cells[0];
         nextCells[cells.size() - 1] = cells[cells.size() - 1];
 
-        for (int i = 1; i < cells.size() - 1; ++i) {
+        for (int i = 1; i < cells.size() - 1; i++) {
             int left = cells[i - 1];
             int right = cells[i + 1];
             int state = cells[i];
