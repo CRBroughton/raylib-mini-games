@@ -4,8 +4,7 @@
 #include <cstdlib>
 #include <cmath>
 
-int calculateState(int a, int b, int c) {
-    std::vector<int> ruleset = {1, 0, 1, 1, 0, 1, 1, 0};
+int calculateState(std::vector<int> ruleset, int a, int b, int c) {
     int value = (a << 2) | (b << 1) | c; 
     return ruleset[7 - value];
 }
@@ -21,6 +20,7 @@ void setup(std::vector<int>& cells, int cellSize) {
 }
 
 int main(void) {
+    std::vector<int> ruleset = {1, 0, 1, 1, 0, 1, 1, 0};
     Color BG_COLOR = {40, 40, 40, 255};
 
     const int WINDOW_WIDTH = 810;
@@ -63,7 +63,7 @@ int main(void) {
             int left = cells[i - 1];
             int right = cells[i + 1];
             int state = cells[i];
-            int newState = calculateState(left, state, right);
+            int newState = calculateState(ruleset, left, state, right);
             nextCells[i] = newState;
         }
 
