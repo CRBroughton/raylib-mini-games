@@ -22,6 +22,9 @@ int main(void) {
         for (int i = 0; i < 10; ++i) {
             int x = i * cellSize;
             int y = 0;
+
+            const int borderWidth = 1;
+            DrawRectangle(x - borderWidth, y - borderWidth, cellSize + 2 * borderWidth, cellSize + 2 * borderWidth, BLACK);
             if (cells[i] == 1) {
                 DrawRectangle(x, y, cellSize, cellSize, BLACK);
             } else {
