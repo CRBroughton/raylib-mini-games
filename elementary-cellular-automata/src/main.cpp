@@ -9,7 +9,7 @@ int main(void) {
     const int cells[10] = {1,0,0,1,0,1,0,1,1,0};
     const int cellSize = 40;
 
-    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Conways Game of Life");
+    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Elementary Automata");
 
     int FPS = 15;
     SetTargetFPS(FPS);
