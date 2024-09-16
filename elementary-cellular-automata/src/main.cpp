@@ -1,6 +1,6 @@
 #include <raylib.h>
 #include <iostream>
-#include <cstring>
+#include <vector>
 
 int calculateState(int a, int b, int c) {
     if (a == 1 && b == 1 && c == 1) return 1;
@@ -11,6 +11,15 @@ int calculateState(int a, int b, int c) {
     if (a == 0 && b == 1 && c == 0) return 0;
     if (a == 0 && b == 0 && c == 1) return 1;
     if (a == 0 && b == 0 && c == 0) return 0;
+    return 0;
+}
+
+void setup(std::vector<int>& cells, int cellSize) {
+    int total = 400 / cellSize;
+    cells.resize(total);
+    for (int i = 0; i < total; ++i) {
+        cells[i] = i % 2;
+    }
 }
 
 int main(void) {
@@ -18,20 +27,21 @@ int main(void) {
 
     const int WINDOW_WIDTH = 400;
     const int WINDOW_HEIGHT = 400;
-    const int cellSize = 40;
-    int cells[10] = {1,0,0,1,0,1,0,1,1,0};
+    const int cellSize = 10;
+    std::vector<int> cells;
 
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Elementary Automata");
 
     int FPS = 15;
     SetTargetFPS(FPS);
+    setup(cells, cellSize);
 
-    while (!WindowShouldClose())
-    {
-
+    while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(BG_COLOR);
-        for (int i = 0; i < 10; ++i) {
+
+        // Draw the current cells
+        for (int i = 0; i < cells.size(); ++i) {
             int x = i * cellSize;
             int y = 0;
 
@@ -44,19 +54,24 @@ int main(void) {
             }
         }
 
-        int nextCells[10] = {0,0,0,0,0,0,0,0,0,0};
+        // Create a nextCells vector to hold the new states
+        std::vector<int> nextCells(cells.size(), 0); // Initialize
+
+        // First and last cell (boundaries)
         nextCells[0] = cells[0];
-        nextCells[10 - 1] = cells[10 - 1];
-        for (int i = 1; i < 10 - 1; ++i) {
+        nextCells[cells.size() - 1] = cells[cells.size() - 1];
+
+        for (int i = 1; i < cells.size() - 1; ++i) {
             int left = cells[i - 1];
             int right = cells[i + 1];
             int state = cells[i];
             int newState = calculateState(left, state, right);
             nextCells[i] = newState;
+        }
 
-            // copy
-        };
-        std::memcpy(cells, nextCells, sizeof(cells));
+        // cpy
+        cells = nextCells;
+
         EndDrawing();
     }
 
