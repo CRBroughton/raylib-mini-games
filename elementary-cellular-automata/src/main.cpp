@@ -28,6 +28,7 @@ int main(void) {
     const int WINDOW_WIDTH = 400;
     const int WINDOW_HEIGHT = 400;
     const int cellSize = 10;
+    int y = 0;
     std::vector<int> cells;
 
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Elementary Automata");
@@ -43,8 +44,6 @@ int main(void) {
         // Draw the current cells
         for (int i = 0; i < cells.size(); ++i) {
             int x = i * cellSize;
-            int y = 0;
-
             const int borderWidth = 1;
             DrawRectangle(x - borderWidth, y - borderWidth, cellSize + 2 * borderWidth, cellSize + 2 * borderWidth, BLACK);
             if (cells[i] == 1) {
@@ -53,6 +52,8 @@ int main(void) {
                 DrawRectangle(x, y, cellSize, cellSize, WHITE);
             }
         }
+
+        y += cellSize;
 
         // Create a nextCells vector to hold the new states
         std::vector<int> nextCells(cells.size(), 0); // Initialize
