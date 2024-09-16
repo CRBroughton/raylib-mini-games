@@ -50,7 +50,8 @@
         "ratio": "cpp",
         "semaphore": "cpp",
         "stop_token": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "cstring": "cpp"
     },
     "conventionalCommits.scopes": [
         "game-of-life",
