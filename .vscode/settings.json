@@ -53,6 +53,7 @@
         "thread": "cpp"
     },
     "conventionalCommits.scopes": [
-        "game-of-life"
+        "game-of-life",
+        "elementary-cellular-automata"
     ]
 }
