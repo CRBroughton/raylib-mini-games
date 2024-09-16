@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <cmath>
 
 int calculateState(int a, int b, int c) {
     if (a == 1 && b == 1 && c == 1) return 1;
@@ -15,18 +16,20 @@ int calculateState(int a, int b, int c) {
 }
 
 void setup(std::vector<int>& cells, int cellSize) {
-    int total = 400 / cellSize;
+    int total = 410 / cellSize;
     cells.resize(total);
     for (int i = 0; i < total; i++) {
-        cells[i] = rand() % 2;
+        // cells[i] = rand() % 2;
+        cells[i] = 0;
     }
+    cells[floor(total/2)] = 1;
 }
 
 int main(void) {
     Color BG_COLOR = {40, 40, 40, 255};
 
-    const int WINDOW_WIDTH = 400;
-    const int WINDOW_HEIGHT = 400;
+    const int WINDOW_WIDTH = 410;
+    const int WINDOW_HEIGHT = 410;
     const int cellSize = 10;
     int y = 0;
     std::vector<int> cells;
