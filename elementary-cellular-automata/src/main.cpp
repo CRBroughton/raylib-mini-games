@@ -20,7 +20,7 @@ void setup(std::vector<int>& cells, int cellSize) {
 }
 
 int main(void) {
-    std::vector<int> ruleset = {1, 0, 1, 1, 0, 1, 1, 0};
+    std::vector<int> ruleset = {0,1,1,0,1,1,1,0};
     Color BG_COLOR = {40, 40, 40, 255};
 
     const int WINDOW_WIDTH = 810;
@@ -42,11 +42,10 @@ int main(void) {
         for (int i = 0; i < cells.size(); i++) {
             int x = i * cellSize;
             const int borderWidth = 1;
-            DrawRectangle(x - borderWidth, y - borderWidth, cellSize + 2 * borderWidth, cellSize + 2 * borderWidth, BLACK);
             if (cells[i] == 1) {
-                DrawRectangle(x, y, cellSize, cellSize, BLACK);
+                DrawRectangle(x, y, cellSize, cellSize, {42, 23, 59, 255});
             } else {
-                DrawRectangle(x, y, cellSize, cellSize, WHITE);
+                DrawRectangle(x, y, cellSize, cellSize, {63, 44, 95, 255});
             }
         }
 
@@ -55,13 +54,9 @@ int main(void) {
         // Create a nextCells vector to hold the new states
         std::vector<int> nextCells(cells.size(), 0); // Initialize
 
-        // First and last cell (boundaries)
-        nextCells[0] = cells[0];
-        nextCells[cells.size() - 1] = cells[cells.size() - 1];
-
-        for (int i = 1; i < cells.size() - 1; i++) {
-            int left = cells[i - 1];
-            int right = cells[i + 1];
+        for (int i = 0; i < cells.size(); i++) {
+            int left = cells[(i - 1 + cells.size() % cells.size())];
+            int right = cells[(i + 1 + cells.size() % cells.size())];
             int state = cells[i];
             int newState = calculateState(ruleset, left, state, right);
             nextCells[i] = newState;
