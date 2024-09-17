@@ -1,12 +1,21 @@
 #include <raylib.h>
 #include <iostream>
+#include <cmath>
 #include <rlgl.h>
 
 void branch(
     int WINDOW_WIDTH,
     int WINDOW_HEIGHT,
     int branchLength) {
+    // Reposition the origin hack via push matrix
+    // & translate func
+    rlPushMatrix();
+    rlTranslatef(WINDOW_WIDTH / 2, WINDOW_HEIGHT, 0);
     DrawLine(0, 0, 0, - branchLength, {255, 255, 255, 255});
+    rlTranslatef(0, - branchLength, 0);
+    rlRotatef(45, 0, 0, 1);
+    DrawLine(0, 0, 0, - branchLength, {255, 255, 255, 255});
+    rlPopMatrix();
 }
 
 int main(void) {
@@ -28,14 +37,7 @@ int main(void) {
         BeginDrawing();
         ClearBackground(BG_COLOR);
 
-        // Reposition the origin hack via push matrix
-        // & translate func
-        rlPushMatrix();
-        rlTranslatef(WINDOW_WIDTH / 2, WINDOW_HEIGHT, 0);
-
         branch(WINDOW_WIDTH, WINDOW_HEIGHT, branchLength);
-        
-        rlPopMatrix();
 
         EndDrawing();
     }
