@@ -1,5 +1,13 @@
 #include <raylib.h>
 #include <iostream>
+#include <rlgl.h>
+
+void branch(
+    int WINDOW_WIDTH,
+    int WINDOW_HEIGHT,
+    int branchLength) {
+    DrawLine(0, 0, 0, - branchLength, {255, 255, 255, 255});
+}
 
 int main(void) {
     Color BG_COLOR = {40, 40, 40, 255};
@@ -10,7 +18,7 @@ int main(void) {
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Fractal Trees");
 
     int FPS = 15;
-    int lineLength = 100;
+    int branchLength = 100;
     SetTargetFPS(FPS);
 
 
@@ -20,7 +28,14 @@ int main(void) {
         BeginDrawing();
         ClearBackground(BG_COLOR);
 
-        DrawLine(WINDOW_WIDTH / 2, WINDOW_HEIGHT, WINDOW_WIDTH / 2, WINDOW_HEIGHT - lineLength, {255, 255, 255, 255});
+        // Reposition the origin hack via push matrix
+        // & translate func
+        rlPushMatrix();
+        rlTranslatef(WINDOW_WIDTH / 2, WINDOW_HEIGHT, 0);
+
+        branch(WINDOW_WIDTH, WINDOW_HEIGHT, branchLength);
+        
+        rlPopMatrix();
 
         EndDrawing();
     }
