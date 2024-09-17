@@ -4,18 +4,23 @@
 #include <rlgl.h>
 
 void branch(
-    int WINDOW_WIDTH,
-    int WINDOW_HEIGHT,
     int branchLength) {
-    // Reposition the origin hack via push matrix
-    // & translate func
-    rlPushMatrix();
-    rlTranslatef(WINDOW_WIDTH / 2, WINDOW_HEIGHT, 0);
     DrawLine(0, 0, 0, - branchLength, {255, 255, 255, 255});
     rlTranslatef(0, - branchLength, 0);
-    rlRotatef(45, 0, 0, 1);
-    DrawLine(0, 0, 0, - branchLength, {255, 255, 255, 255});
-    rlPopMatrix();
+
+    if (branchLength > 4) {
+        // Reposition the origin hack via push matrix
+        // & translate func
+        rlPushMatrix();
+        rlRotatef(45, 0, 0, 1);
+        // Recursive draw
+        branch(branchLength * 0.67);
+        rlPopMatrix();
+        rlPushMatrix();
+        rlRotatef(-45, 0, 0, 1);
+        branch(branchLength * 0.67);
+        rlPopMatrix();
+    }
 }
 
 int main(void) {
@@ -37,8 +42,14 @@ int main(void) {
         BeginDrawing();
         ClearBackground(BG_COLOR);
 
-        branch(WINDOW_WIDTH, WINDOW_HEIGHT, branchLength);
 
+        // Move initial origin
+        rlPushMatrix();
+        rlTranslatef(WINDOW_WIDTH / 2, WINDOW_HEIGHT, 0);
+        
+        branch(branchLength);
+
+        rlPopMatrix();
         EndDrawing();
     }
 
