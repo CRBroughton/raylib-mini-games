@@ -4,7 +4,8 @@
 #include <rlgl.h>
 
 void branch(
-    int branchLength) {
+    int branchLength,
+    float angle) {
     DrawLine(0, 0, 0, - branchLength, {255, 255, 255, 255});
     rlTranslatef(0, - branchLength, 0);
 
@@ -12,13 +13,13 @@ void branch(
         // Reposition the origin hack via push matrix
         // & translate func
         rlPushMatrix();
-        rlRotatef(45, 0, 0, 1);
+        rlRotatef(angle, 0, 0, 1);
         // Recursive draw
-        branch(branchLength * 0.67);
+        branch(branchLength * 0.67, angle);
         rlPopMatrix();
         rlPushMatrix();
-        rlRotatef(-45, 0, 0, 1);
-        branch(branchLength * 0.67);
+        rlRotatef(-angle, 0, 0, 1);
+        branch(branchLength * 0.67, angle);
         rlPopMatrix();
     }
 }
@@ -33,6 +34,7 @@ int main(void) {
 
     int FPS = 15;
     int branchLength = 100;
+    float angle = 45.0f;
     SetTargetFPS(FPS);
 
 
@@ -47,7 +49,7 @@ int main(void) {
         rlPushMatrix();
         rlTranslatef(WINDOW_WIDTH / 2, WINDOW_HEIGHT, 0);
         
-        branch(branchLength);
+        branch(branchLength, angle);
 
         rlPopMatrix();
         EndDrawing();
