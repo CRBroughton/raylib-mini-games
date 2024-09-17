@@ -55,6 +55,7 @@
     },
     "conventionalCommits.scopes": [
         "game-of-life",
-        "elementary-cellular-automata"
+        "elementary-cellular-automata",
+        "fractal-trees"
     ]
 }
