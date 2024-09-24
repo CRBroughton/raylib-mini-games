@@ -14,7 +14,7 @@ int main(void) {
     Vector2 endPoint = { 300, 300 };
     Boundary boundary(startPoint, endPoint);
     CustomRay ray({100, 200});
-    bool point = ray.cast(boundary);
+    bool point = ray.Cast(boundary);
 
     while (!WindowShouldClose()) {
         BeginDrawing();
