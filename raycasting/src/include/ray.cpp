@@ -31,10 +31,12 @@ class CustomRay {
                 return false;
             };
 
-            float t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denominator;
-            float u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / denominator;
+            // position along the wall where the intersection occurs
+            float wallIntersectionFactor = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denominator;
+            // how far along the ray the intersection occurs
+            float rayIntersectionFactor = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / denominator;
 
-            return (t >= 0 && t <= 1 && u >= 0);
+            return (wallIntersectionFactor >= 0 && wallIntersectionFactor <= 1 && rayIntersectionFactor >= 0);
 
         }
 
