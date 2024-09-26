@@ -31,7 +31,7 @@ class CustomRay {
             Vector2Normalize(&direction);
         }
 
-        bool Cast(Boundary wall) {
+        Vector2 Cast(Boundary wall) {
             float x1 = wall.start.x;
             float y1 = wall.start.y;
             float x2 = wall.end.x;
@@ -44,7 +44,7 @@ class CustomRay {
 
             float denominator = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
             if (denominator == 0) {
-                return false;
+                return {0,0};
             };
 
             // position along the wall where the intersection occurs
@@ -52,9 +52,16 @@ class CustomRay {
             // how far along the ray the intersection occurs
             float rayIntersectionFactor = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / denominator;
 
-            return (wallIntersectionFactor >= 0 && wallIntersectionFactor <= 1 && rayIntersectionFactor >= 0);
-
-        }
+            if (wallIntersectionFactor >= 0 && wallIntersectionFactor <= 1 && rayIntersectionFactor >= 0) {
+                Vector2 intersectionPoint = {
+                    x1 + wallIntersectionFactor * (x2 - x1),
+                    y1 + wallIntersectionFactor * (y2 - y1)
+                };
+                return intersectionPoint;
+            } else {
+                return {0,0};
+            }
+         }
 
     private:
 };

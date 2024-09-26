@@ -19,18 +19,16 @@ int main(void) {
         BeginDrawing();
         
         ClearBackground(RAYWHITE);
-    bool point = ray.Cast(boundary);
+    Vector2 point = ray.Cast(boundary);
 
         boundary.Draw();
         ray.Draw();
         Vector2 mousePosition = GetMousePosition();
         ray.SetDirection(mousePosition.x, mousePosition.y);
 
-        // if (point) {
-        //     DrawEllipse(point.x, point.y, 8, 8, BLACK);
-        // }
-
-        TraceLog(LOG_INFO, "The value of myBool is: %s", point ? "true" : "false");
+        if (point.x != 0 && point.y != 0) {
+            DrawEllipse(point.x, point.y, 8, 8, BLACK);
+        }
         
         EndDrawing();
     }
