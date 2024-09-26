@@ -14,14 +14,17 @@ int main(void) {
     Vector2 endPoint = { 300, 300 };
     Boundary boundary(startPoint, endPoint);
     CustomRay ray({100, 200});
-    bool point = ray.Cast(boundary);
 
     while (!WindowShouldClose()) {
         BeginDrawing();
         
         ClearBackground(RAYWHITE);
+    bool point = ray.Cast(boundary);
+
         boundary.Draw();
         ray.Draw();
+        Vector2 mousePosition = GetMousePosition();
+        ray.SetDirection(mousePosition.x, mousePosition.y);
 
         // if (point) {
         //     DrawEllipse(point.x, point.y, 8, 8, BLACK);

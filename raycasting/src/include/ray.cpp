@@ -1,6 +1,15 @@
 #pragma once
 #include "raylib.h"
 #include "boundary.cpp"
+#include <cmath>
+
+void Vector2Normalize(Vector2* v) {
+    float length = sqrtf(v->x * v->x + v->y * v->y);
+    if (length != 0) {
+        v->x /= length;
+        v->y /= length;
+    }
+}
 
 class CustomRay {
     public:
@@ -12,7 +21,14 @@ class CustomRay {
         };
 
         void Draw() const {
-            DrawLineV(position, {position.x + 10, position.y}, BLUE);
+            Vector2 rayEndPosition = {position.x + direction.x * 1000, position.y + direction.y * 1000};
+            DrawLineV(position, rayEndPosition, BLUE);
+        }
+
+        void SetDirection(float x, float y) {
+            this->direction.x = x - this->position.x;
+            this->direction.y= y - this->position.y;
+            Vector2Normalize(&direction);
         }
 
         bool Cast(Boundary wall) {
