@@ -1,6 +1,7 @@
 #include "include/raylib.h"
 #include "include/boundary.cpp"
 #include "include/ray.cpp"
+#include "include/particle.cpp"
 
 int main(void)
 {
@@ -11,27 +12,23 @@ int main(void)
 
     SetTargetFPS(60);
 
-    Vector2 startPoint = {300, 100};
-    Vector2 endPoint = {300, 300};
+    Vector2 startPoint = {100, 100};
+    Vector2 endPoint = {200, 300};
     Boundary boundary(startPoint, endPoint);
-    CustomRay ray({100, 200});
+    Particle particle({screenWidth / 2, screenHeight / 2});
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
-        Vector2 point = ray.Cast(boundary);
 
         boundary.Draw();
-        ray.Draw();
+        particle.show();
+        particle.look(boundary);
         Vector2 mousePosition = GetMousePosition();
-        ray.SetDirection(mousePosition.x, mousePosition.y);
 
-        if (point.x != 0 && point.y != 0)
-        {
-            DrawEllipse(point.x, point.y, 8, 8, BLACK);
-        }
+        particle.update(mousePosition);
 
         EndDrawing();
     }

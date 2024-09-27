@@ -13,20 +13,25 @@ void Vector2Normalize(Vector2 *v)
     }
 }
 
+Vector2 fromAngle(float angle, float length = 1.0f)
+{
+    return {length * cosf(angle), length * sinf(angle)};
+}
+
 class CustomRay
 {
 public:
     Vector2 position;
     Vector2 direction;
-    CustomRay(Vector2 start)
+    CustomRay(Vector2 start, float angle)
     {
         position = start;
-        direction = {1, 0};
+        direction = fromAngle(angle);
     };
 
     void Draw() const
     {
-        Vector2 rayEndPosition = {position.x + direction.x * 1000, position.y + direction.y * 1000};
+        Vector2 rayEndPosition = {position.x + direction.x * 10, position.y + direction.y * 10};
         DrawLineV(position, rayEndPosition, BLUE);
     }
 
