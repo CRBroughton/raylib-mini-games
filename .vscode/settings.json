@@ -51,7 +51,8 @@
         "semaphore": "cpp",
         "stop_token": "cpp",
         "thread": "cpp",
-        "cstring": "cpp"
+        "cstring": "cpp",
+        "*.m": "cpp"
     },
     "conventionalCommits.scopes": [
         "game-of-life",
