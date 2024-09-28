@@ -39,7 +39,7 @@ public:
 
     void generateRays()
     {
-        for (size_t angle = 0; angle < 360; angle += 10)
+        for (size_t angle = 0; angle < 360; angle += 1)
         {
             CustomRay ray(position, radians(angle));
             rays.push_back(ray);
@@ -71,7 +71,7 @@ public:
             }
             if (closest.x != 0 && closest.y != 0)
             {
-                DrawLineV(this->position, closest, BLUE);
+                DrawLineV(this->position, closest, {255, 255, 255, 100});
             }
         };
     }

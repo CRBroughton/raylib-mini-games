@@ -36,7 +36,7 @@ int main(void)
     {
         BeginDrawing();
 
-        ClearBackground(RAYWHITE);
+        ClearBackground(BLACK);
         for (Boundary &boundary : boundaries)
         {
             boundary.Draw();

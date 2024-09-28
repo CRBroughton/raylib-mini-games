@@ -15,7 +15,7 @@ public:
 
     void Draw() const
     {
-        DrawLineV(start, end, DARKGREEN);
+        DrawLineV(start, end, WHITE);
     }
 
 private:

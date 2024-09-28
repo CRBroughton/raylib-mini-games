@@ -32,7 +32,7 @@ public:
     void Draw() const
     {
         Vector2 rayEndPosition = {position.x + direction.x * 10, position.y + direction.y * 10};
-        DrawLineV(position, rayEndPosition, BLUE);
+        DrawLineV(position, rayEndPosition, WHITE);
     }
 
     void SetDirection(float x, float y)
