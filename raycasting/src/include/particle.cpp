@@ -67,8 +67,6 @@ public:
                         record = distance;
                         closest = point;
                     }
-
-                    // distance = min(distance, record);
                 }
             }
             if (closest.x != 0 && closest.y != 0)

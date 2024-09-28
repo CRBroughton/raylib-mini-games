@@ -6,6 +6,7 @@
 
 const int screenWidth = 400;
 const int screenHeight = 400;
+
 Vector2 GetRandomCoord()
 {
     float x = static_cast<float>(GetRandomValue(0, screenWidth));
@@ -19,11 +20,7 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "Raycasting Demo");
     SetTargetFPS(60);
 
-    Vector2 startPoint = {100, 100};
-    Vector2 endPoint = {200, 300};
     std::vector<Boundary> boundaries;
-
-    // Boundary boundary(startPoint, endPoint);
 
     for (size_t i = 0; i < 5; i++)
     {
@@ -47,7 +44,6 @@ int main(void)
         particle.show();
         particle.look(boundaries);
         Vector2 mousePosition = GetMousePosition();
-
         particle.update(mousePosition);
 
         EndDrawing();
