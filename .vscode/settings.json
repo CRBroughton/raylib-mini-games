@@ -52,12 +52,14 @@
         "stop_token": "cpp",
         "thread": "cpp",
         "cstring": "cpp",
-        "*.m": "cpp"
+        "*.m": "cpp",
+        "map": "cpp"
     },
     "conventionalCommits.scopes": [
         "game-of-life",
         "elementary-cellular-automata",
         "fractal-trees",
-        "raycasting"
+        "raycasting",
+        "menger-sponge-fractal"
     ]
 }
