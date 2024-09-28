@@ -45,7 +45,7 @@ int main(void)
             boundary.Draw();
         };
         particle.show();
-        particle.look(boundaries[1]);
+        particle.look(boundaries);
         Vector2 mousePosition = GetMousePosition();
 
         particle.update(mousePosition);

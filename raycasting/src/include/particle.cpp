@@ -5,10 +5,24 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
+#include <limits>
 
 float radians(float degrees)
 {
     return degrees * DEG2RAD;
+}
+
+// Distance between two vectors
+float VectorDist(Vector2 v1, Vector2 v2)
+{
+    float dx = v2.x - v1.x;
+    float dy = v2.y - v1.y;
+    return sqrtf(dx * dx + dy * dy);
+}
+
+float min(float a, float b)
+{
+    return (a < b) ? a : b;
 }
 
 class Particle
@@ -32,15 +46,34 @@ public:
         }
     }
 
-    void look(Boundary wall)
+    void look(std::vector<Boundary> walls)
     {
         for (CustomRay &ray : rays)
         {
-            ray.position = this->position;
-            Vector2 point = ray.Cast(wall);
-            if (point.x && point.y)
+            Vector2 closest = {0, 0};
+            // positive infinity
+            float record = std::numeric_limits<float>::infinity();
+            for (Boundary &wall : walls)
             {
-                DrawLineV(this->position, point, BLUE);
+
+                ray.position = this->position;
+                Vector2 point = ray.Cast(wall);
+
+                if (point.x != 0 && point.y != 0)
+                {
+                    float distance = VectorDist(this->position, point);
+                    if (distance < record)
+                    {
+                        record = distance;
+                        closest = point;
+                    }
+
+                    // distance = min(distance, record);
+                }
+            }
+            if (closest.x != 0 && closest.y != 0)
+            {
+                DrawLineV(this->position, closest, BLUE);
             }
         };
     }
