@@ -6,3 +6,5 @@
 **/*.js
 **/*.wasm
 **/*.data
+**/lib
+**/web
