@@ -1,9 +1,16 @@
 #include "include/raylib.h"
 #include "include/box.cpp"
 #include <cmath>
+#include <vector>
 
 const int screenWidth = 400;
 const int screenHeight = 400;
+
+template <typename T>
+void addAll(std::vector<T> &destination, const std::vector<T> &source)
+{
+    destination.insert(destination.end(), source.begin(), source.end());
+}
 
 int main(void)
 {
@@ -23,8 +30,10 @@ int main(void)
 
     DisableCursor();
 
+    std::vector<Box> sponge;
     Vector3 cubePosition = {0.0f, 0.0f, 0.0f};
-    Box box(cubePosition, 4);
+    Box initialBox(cubePosition, 4.0f);
+    sponge.push_back(initialBox);
 
     while (!WindowShouldClose())
     {
@@ -44,7 +53,23 @@ int main(void)
         ClearBackground(BLACK);
 
         BeginMode3D(camera);
-        box.show();
+
+        for (Box b : sponge)
+        {
+            b.show();
+        };
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        {
+
+            std::vector<Box> nextGeneration;
+            for (Box box : sponge)
+            {
+                std::vector<Box> newBoxes = box.generate();
+                addAll(nextGeneration, newBoxes);
+            }
+            sponge = nextGeneration;
+        }
+
         EndMode3D();
         EndDrawing();
     }

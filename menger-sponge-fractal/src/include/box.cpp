@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include <cmath>
 #include <vector>
+#include <rlgl.h>
 
 class Box
 {
@@ -18,13 +19,13 @@ public:
     std::vector<Box> generate()
     {
         std::vector<Box> boxes;
-        for (size_t x = -1; x < 2; x++)
+        for (int x = -1; x < 2; x++)
         {
-            for (size_t y = -1; y < 2; y++)
+            for (int y = -1; y < 2; y++)
             {
-                for (size_t z = -1; z < 2; z++)
+                for (int z = -1; z < 2; z++)
                 {
-                    float newSize = this->size / 3;
+                    float newSize = this->size / 3.0f;
                     Box box({
                                 this->position.x + x * newSize,
                                 this->position.y + y * newSize,
