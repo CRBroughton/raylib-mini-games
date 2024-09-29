@@ -17,6 +17,8 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "Menger Sponge Fractal");
     SetTargetFPS(60);
 
+    Shader shader = LoadShader("src/shaders/vs.glsl", "src/shaders/fs.glsl");
+
     Camera camera = {0};
     camera.position = {10.0f, 10.0f, 10.0f};
     camera.target = {0.0f, 0.0f, 0.0f};
@@ -26,7 +28,17 @@ int main(void)
 
     float cameraRotationSpeed = 0.01f;
     float radius = 10.0f;
-    float angle = 0.0f;
+    float angleX = 0.0f;
+    // Slight diff on the Y angle, should help avoid singularity at the poles
+    float angleY = 0.345f;
+
+    Model cubeModel = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
+    cubeModel.materials[0].shader = shader;
+
+    // Set ambient color for the shader
+    int ambientColorLoc = GetShaderLocation(shader, "ambientColor");
+    Vector3 ambientColor = {5.0f, 2.0f, 5.0f};
+    SetShaderValue(shader, ambientColorLoc, &ambientColor, SHADER_UNIFORM_VEC3);
 
     // DisableCursor();
 
@@ -38,15 +50,20 @@ int main(void)
     while (!WindowShouldClose())
     {
 
-        angle += cameraRotationSpeed;
-        if (angle > 2 * PI)
+        angleX += cameraRotationSpeed;
+        angleY += cameraRotationSpeed * 0.5f; // Rotate slower on the Y axis
+        if (angleX > 2 * PI)
         {
-            angle = 0.0f; // Reset the angle after a full rotation
+            angleX = 0.0f;
+        }
+        if (angleY > 2 * PI)
+        {
+            angleY = 0.0f;
         }
 
-        camera.position.x = radius * cos(angle);
-        camera.position.z = radius * sin(angle);
-        camera.position.y = 5.0f;
+        camera.position.x = radius * cos(angleY) * sin(angleX);
+        camera.position.z = radius * cos(angleY) * cos(angleX);
+        camera.position.y = radius * sin(angleY);
         // UpdateCamera(&camera, CAMERA_FREE);
         BeginDrawing();
 
@@ -54,9 +71,13 @@ int main(void)
 
         BeginMode3D(camera);
 
+        // Pass the current camera position to the shader
+        int cameraPosLoc = GetShaderLocation(shader, "cameraPosition");
+        SetShaderValue(shader, cameraPosLoc, &camera.position, SHADER_UNIFORM_VEC3);
+
         for (Box b : sponge)
         {
-            b.show();
+            b.show(cubeModel);
         };
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {

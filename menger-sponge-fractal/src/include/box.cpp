@@ -45,9 +45,8 @@ public:
         return boxes;
     }
 
-    void show()
+    void show(Model cubeModel)
     {
-        DrawCube(this->position, this->size, this->size, this->size, {255, 255, 255, 50});
-        DrawCubeWires(this->position, this->size, this->size, this->size, {190, 33, 55, 50});
+        DrawModel(cubeModel, this->position, this->size, WHITE);
     }
 };
