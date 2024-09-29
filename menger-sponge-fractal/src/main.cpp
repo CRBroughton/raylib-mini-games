@@ -1,4 +1,5 @@
 #include "include/raylib.h"
+#include "include/box.cpp"
 #include <cmath>
 
 const int screenWidth = 400;
@@ -20,8 +21,11 @@ int main(void)
     float radius = 10.0f;
     float angle = 0.0f;
 
-    Vector3 cubePosition = {0.0f, 0.0f, 0.0f};
     DisableCursor();
+
+    Vector3 cubePosition = {0.0f, 0.0f, 0.0f};
+    Box box(cubePosition, 4);
+
     while (!WindowShouldClose())
     {
 
@@ -40,9 +44,7 @@ int main(void)
         ClearBackground(BLACK);
 
         BeginMode3D(camera);
-        DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
-        DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
-
+        box.show();
         EndMode3D();
         EndDrawing();
     }
