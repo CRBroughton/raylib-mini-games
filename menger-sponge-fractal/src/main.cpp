@@ -28,7 +28,7 @@ int main(void)
     float radius = 10.0f;
     float angle = 0.0f;
 
-    DisableCursor();
+    // DisableCursor();
 
     std::vector<Box> sponge;
     Vector3 cubePosition = {0.0f, 0.0f, 0.0f};

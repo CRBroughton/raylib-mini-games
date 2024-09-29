@@ -25,14 +25,20 @@ public:
             {
                 for (int z = -1; z < 2; z++)
                 {
-                    float newSize = this->size / 3.0f;
-                    Box box({
-                                this->position.x + x * newSize,
-                                this->position.y + y * newSize,
-                                this->position.z + z * newSize,
-                            },
-                            newSize);
-                    boxes.push_back(box);
+
+                    int sum = abs(x) + abs(y) + abs(z);
+                    if (sum > 1)
+                    {
+
+                        float newSize = this->size / 3.0f;
+                        Box box({
+                                    this->position.x + x * newSize,
+                                    this->position.y + y * newSize,
+                                    this->position.z + z * newSize,
+                                },
+                                newSize);
+                        boxes.push_back(box);
+                    }
                 }
             }
         }
@@ -41,7 +47,7 @@ public:
 
     void show()
     {
-        // DrawCube(this->position, this->size, this->size, this->size, RED);
-        DrawCubeWires(this->position, this->size, this->size, this->size, MAROON);
+        DrawCube(this->position, this->size, this->size, this->size, {255, 255, 255, 50});
+        DrawCubeWires(this->position, this->size, this->size, this->size, {190, 33, 55, 50});
     }
 };
