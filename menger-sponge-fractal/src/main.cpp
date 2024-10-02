@@ -3,8 +3,8 @@
 #include <cmath>
 #include <vector>
 
-const int screenWidth = 400;
-const int screenHeight = 400;
+const int screenWidth = 1000;
+const int screenHeight = 1000;
 
 template <typename T>
 void addAll(std::vector<T> &destination, const std::vector<T> &source)
@@ -37,7 +37,7 @@ int main(void)
 
     // Set ambient color for the shader
     int ambientColorLoc = GetShaderLocation(shader, "ambientColor");
-    Vector3 ambientColor = {5.0f, 2.0f, 5.0f};
+    Vector3 ambientColor = {5.0f, 2.0f, 10.0f};
     SetShaderValue(shader, ambientColorLoc, &ambientColor, SHADER_UNIFORM_VEC3);
 
     // DisableCursor();
