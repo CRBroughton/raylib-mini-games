@@ -60,6 +60,7 @@
         "elementary-cellular-automata",
         "fractal-trees",
         "raycasting",
-        "menger-sponge-fractal"
+        "menger-sponge-fractal",
+        "lorenz-attractor"
     ]
 }
