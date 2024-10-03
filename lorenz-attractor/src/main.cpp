@@ -1,19 +1,16 @@
 #include "include/raylib.h"
-#include "include/box.cpp"
-#include <cmath>
-#include <vector>
 
 const int screenWidth = 800;
 const int screenHeight = 800;
 
-float x = 0;
+float x = 00.1;
 float y = 0;
 float z = 0;
 
-const float a = 1;
-const float b = 1;
-const float c = 1;
-
+const float a = 10;
+const float b = 28;
+const float c = 8.0 / 3.0;
+const float scale = 10.0f;
 int main(void)
 {
     InitWindow(screenWidth, screenHeight, "Lorenz Attractor");
@@ -23,14 +20,17 @@ int main(void)
     {
         BeginDrawing();
 
-        ClearBackground(BLACK);
-
-        float dx = a * (y - x);
-        float dy = x * (b - z) - y;
-        float dz = x * y - c * z;
+        float dt = 0.01;
+        float dx = (a * (y - x)) * dt;
+        float dy = (x * (b - z) - y) * dt;
+        float dz = (x * y - c * z) * dt;
         x = x + dx;
         y = y + dy;
         z = z + dz;
+
+        int screenX = screenWidth / 2 + x * scale;
+        int screenY = screenHeight / 2 + y * scale;
+        DrawPixel(screenX, screenY, WHITE);
 
         EndDrawing();
     }

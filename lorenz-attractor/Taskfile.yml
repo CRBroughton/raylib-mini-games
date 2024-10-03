@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  GAME_NAME: menger-sponge-fractal
+  GAME_NAME: lorenz-attractor
   GAME_VERSION: 0.0.1
 
 tasks:
