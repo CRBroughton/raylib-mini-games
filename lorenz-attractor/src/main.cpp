@@ -1,5 +1,6 @@
 #include "include/raylib.h"
 #include <vector>
+#include <math.h>
 
 const int screenWidth = 800;
 const int screenHeight = 800;
@@ -14,6 +15,9 @@ const float c = 8.0f / 3.0f;
 const float scale = 1.0f;
 
 std::vector<Vector3> points;
+std::vector<Color> colors;
+
+float timeElapsed = 0.0f;
 
 int main(void)
 {
@@ -32,24 +36,32 @@ int main(void)
         BeginDrawing();
         BeginMode3D(camera);
 
-        float dt = 0.01f;
+        float dt = GetFrameTime();
+        timeElapsed += dt;
+
         float dx = (a * (y - x)) * dt;
         float dy = (x * (b - z) - y) * dt;
         float dz = (x * y - c * z) * dt;
+
         x = x + dx;
         y = y + dy;
         z = z + dz;
 
         points.push_back({x, y, z});
 
+        float hue = fmod(timeElapsed * 200.0f, 360.0f);
+        Color color = ColorFromHSV(hue, 1.0f, 1.0f);
+        colors.push_back(color);
+
         for (int i = 1; i < points.size(); i++)
         {
-            DrawLine3D(points[i - 1], points[i], WHITE);
+            DrawLine3D(points[i - 1], points[i], colors[i - 1]);
         }
 
         EndMode3D();
         EndDrawing();
     }
+
     CloseWindow();
     return 0;
 }
