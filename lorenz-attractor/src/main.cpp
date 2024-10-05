@@ -1,4 +1,5 @@
 #include "include/raylib.h"
+#include "include/utils.h"
 #include <vector>
 #include <math.h>
 
@@ -26,16 +27,13 @@ int main(void)
 
     Camera3D camera = {0};
     camera.position = (Vector3){0.0f, 0.0f, 150.0f};
-    camera.target = (Vector3){0.0f, 0.0f, 0.0f};
     camera.up = (Vector3){0.0f, 1.0f, 0.0f};
     camera.fovy = 45.0f;
     camera.projection = CAMERA_PERSPECTIVE;
+    float cameraAngle = 0.0f;
 
     while (!WindowShouldClose())
     {
-        BeginDrawing();
-        BeginMode3D(camera);
-
         float dt = GetFrameTime();
         timeElapsed += dt;
 
@@ -50,12 +48,39 @@ int main(void)
         points.push_back({x, y, z});
 
         float hue = fmod(timeElapsed * 200.0f, 360.0f);
-        Color color = ColorFromHSV(hue, 1.0f, 1.0f);
-        colors.push_back(color);
+        Color colour = ColorFromHSV(hue, 1.0f, 1.0f);
+        colors.push_back(colour);
 
-        for (int i = 1; i < points.size(); i++)
+        Vector3 center = {0.0f, 0.0f, 0.0f};
+        for (const Vector3 &point : points)
         {
-            DrawLine3D(points[i - 1], points[i], colors[i - 1]);
+            center.x += point.x;
+            center.y += point.y;
+            center.z += point.z;
+        }
+
+        center.x /= points.size();
+        center.y /= points.size();
+        center.z /= points.size();
+        camera.target = center;
+        cameraAngle += dt * 0.5f;
+        float cameraRadius = 150.0f;
+
+        BeginDrawing();
+        ClearBackground(BLACK);
+
+        BeginMode3D(camera);
+
+        UpdateCameraRelativeToCenter(&camera, center, 150.0f, 0.5f);
+
+        // protect OOB
+        int pointCount = points.size();
+        if (pointCount > 1)
+        {
+            for (int i = 1; i < pointCount; i++)
+            {
+                DrawThickLine3D(points[i - 1], points[i], 0.2f, colors[i - 1]);
+            }
         }
 
         EndMode3D();
