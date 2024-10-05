@@ -64,22 +64,25 @@ int main(void)
         center.z /= points.size();
         camera.target = center;
         cameraAngle += dt * 0.5f;
-        float cameraRadius = 150.0f;
 
         BeginDrawing();
         ClearBackground(BLACK);
 
         BeginMode3D(camera);
 
-        UpdateCameraRelativeToCenter(&camera, center, 150.0f, 0.5f);
+        const float cameraRadius = 150.0f;
+        const float rotationSpeed = 0.5f;
+        UpdateCameraRelativeToCenter(&camera, center, cameraRadius, rotationSpeed);
 
         // protect OOB
         int pointCount = points.size();
+        const float lineThickness = 0.2f;
         if (pointCount > 1)
         {
             for (int i = 1; i < pointCount; i++)
             {
-                DrawThickLine3D(points[i - 1], points[i], 0.2f, colors[i - 1]);
+
+                DrawThickLine3D(points[i - 1], points[i], lineThickness, colors[i - 1]);
             }
         }
 
