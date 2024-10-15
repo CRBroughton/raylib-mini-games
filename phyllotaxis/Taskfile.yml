@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  GAME_NAME: raycasting
+  GAME_NAME: phyllotaxis
   GAME_VERSION: 0.0.1
 
 tasks:
